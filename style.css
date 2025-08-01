@@ -1,0 +1,32 @@
+body {
+  font-family: sans-serif;
+  background: #fdfdfd;
+  text-align: center;
+  padding: 3em;
+  color: #222;
+}
+
+.hero {
+  max-width: 600px;
+  margin: auto;
+}
+
+.monster {
+  width: 160px;
+  margin-bottom: 1em;
+}
+
+button {
+  background-color: #0077ff;
+  color: white;
+  padding: 1em 2em;
+  border: none;
+  font-size: 1em;
+  border-radius: 8px;
+  margin-top: 1em;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #005fd1;
+}
