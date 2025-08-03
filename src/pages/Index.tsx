@@ -9,7 +9,7 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-[#E6F7FF] text-[#1D2D5D] px-6 py-12 font-sans">
-      {/* Logo und Produktname */}
+      {/* Logo + Produktname */}
       <header className="text-center mb-10">
         <img
           src="/monster-ag-logo.png"
@@ -22,7 +22,7 @@ export default function Index() {
         </p>
       </header>
 
-      {/* Upload-Bereich */}
+      {/* Upload-Feld */}
       <section className="max-w-xl mx-auto bg-white rounded-xl shadow-lg p-6 mb-12 text-center">
         <UploadCloud className="w-10 h-10 mx-auto text-[#1D2D5D] mb-4" />
         <p className="mb-4 font-medium">PDF hochladen oder Website-URL eingeben:</p>
@@ -45,7 +45,7 @@ export default function Index() {
         </Button>
       </section>
 
-      {/* Ergebnis-Anzeige nach Upload (Dummy-Ampel-Info) */}
+      {/* Ergebnisanzeige (nach Upload sichtbar) */}
       {fileUploaded && (
         <section className="text-center mb-16">
           <h2 className="text-2xl font-bold mb-6">Erste Einschätzung</h2>
@@ -60,6 +60,7 @@ export default function Index() {
         </section>
       )}
 
+      {/* Modal-Auslösung */}
       <PackageSelectionModal
         open={packageModalOpen}
         onOpenChange={setPackageModalOpen}
