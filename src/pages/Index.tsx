@@ -39,7 +39,7 @@ export default function Index() {
           className="mb-4 block w-full px-4 py-2 border border-gray-300 rounded"
         />
         <Button
-          onClick={() => setFileUploaded(true)}
+          onClick={() => setPackageModalOpen(true)}
           className="bg-[#23B1EC] hover:bg-[#1D2D5D] text-white w-full"
         >
           Jetzt prüfen lassen
@@ -73,8 +73,8 @@ export default function Index() {
       {/* Call-to-Action */}
       <div className="text-center">
         <Button
-          className="bg-[#23B1EC] hover:bg-[#1D2D5D] text-white px-6 py-3 rounded"
           onClick={() => setPackageModalOpen(true)}
+          className="bg-[#23B1EC] hover:bg-[#1D2D5D] text-white px-6 py-3 rounded"
         >
           Weiter zur Auswertung
         </Button>
