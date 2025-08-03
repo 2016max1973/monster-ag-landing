@@ -52,10 +52,10 @@ export default function Index() {
         <input
           type="file"
           accept=".pdf,.doc,.docx"
-          onChange={() => setFileUploaded(true)}
-          className="mb-4 block mx-auto"
-        />
-        <input
+onChange={(e) => {
+  const file = e.target.files?.[0] ?? null;
+  setFileUploaded(file);
+}}        <input
           type="email"
           placeholder="Deine E-Mail-Adresse"
           value={email}
