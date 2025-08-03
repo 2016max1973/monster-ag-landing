@@ -1,85 +1,82 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Check, Shield, Zap } from "lucide-react";
+import { UploadCloud, CheckCircle, AlertTriangle, XCircle } from "lucide-react";
 import PackageSelectionModal from "@/components/PackageSelectionModal";
 
 export default function Index() {
+  const [fileUploaded, setFileUploaded] = useState(false);
   const [packageModalOpen, setPackageModalOpen] = useState(false);
-  const [ampelStatus, setAmpelStatus] = useState<'green' | 'yellow' | 'red'>('yellow');
-
-  const handleAmpelTest = () => {
-    const states = ['green', 'yellow', 'red'];
-    const next = states[(states.indexOf(ampelStatus) + 1) % 3];
-    setAmpelStatus(next as 'green' | 'yellow' | 'red');
-  };
 
   return (
     <div className="min-h-screen bg-[#E6F7FF] text-[#1D2D5D] px-6 py-12 font-sans">
+      {/* Logo und Produktname */}
       <header className="text-center mb-10">
         <img
           src="/monster-ag-logo.png"
           alt="Monster AG Logo"
-          className="w-32 mx-auto mb-4"
+          className="w-44 h-44 mx-auto mb-4 object-contain"
         />
-        <h1 className="text-4xl font-bold">Datenschutzprüfung mit Monster AG</h1>
-        <p className="mt-2 text-gray-700">
-          Wir scannen deine Website auf DSGVO & Barrierefreiheit – mit Ampelbewertung.
+        <h1 className="text-5xl font-extrabold tracking-tight">DSVGKO</h1>
+        <p className="text-lg text-gray-700 mt-2">
+          DSGVO-Check deiner Datenschutzerklärung – anonym, automatisch, verständlich.
         </p>
       </header>
 
-      {/* Ampelanzeige */}
-      <div className="text-center mb-10">
-        <div className="flex justify-center items-center gap-4">
-          <div className={`w-6 h-6 rounded-full ${ampelStatus === 'red' ? 'bg-red-500' : 'bg-red-200'}`}></div>
-          <div className={`w-6 h-6 rounded-full ${ampelStatus === 'yellow' ? 'bg-yellow-400' : 'bg-yellow-100'}`}></div>
-          <div className={`w-6 h-6 rounded-full ${ampelStatus === 'green' ? 'bg-green-500' : 'bg-green-100'}`}></div>
-        </div>
-        <Button className="mt-4 bg-[#23B1EC] hover:bg-[#1D2D5D] text-white" onClick={handleAmpelTest}>
-          Test: Ampel wechseln
+      {/* Upload-Bereich */}
+      <section className="max-w-xl mx-auto bg-white rounded-xl shadow-lg p-6 mb-12 text-center">
+        <UploadCloud className="w-10 h-10 mx-auto text-[#1D2D5D] mb-4" />
+        <p className="mb-4 font-medium">Lade deine Datenschutzerklärung als PDF hoch oder gib eine Website-URL an:</p>
+        <input
+          type="file"
+          accept=".pdf"
+          onChange={() => setFileUploaded(true)}
+          className="mb-4 block mx-auto"
+        />
+        <input
+          type="text"
+          placeholder="https://deine-website.de"
+          className="mb-4 block w-full px-4 py-2 border border-gray-300 rounded"
+        />
+        <Button
+          onClick={() => setFileUploaded(true)}
+          className="bg-[#23B1EC] hover:bg-[#1D2D5D] text-white w-full"
+        >
+          Jetzt prüfen lassen
         </Button>
-      </div>
-
-      {/* Info-Karten */}
-      <section className="grid gap-6 md:grid-cols-3 max-w-6xl mx-auto mb-12">
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Shield className="w-5 h-5 text-[#1D2D5D]" /> Datenschutz
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            DSGVO-Konformität deiner Seite – geprüft, bewertet und dokumentiert.
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Zap className="w-5 h-5 text-[#1D2D5D]" /> Barrierefreiheit
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            Wir erkennen Verstöße gegen das neue BFSG / EAA rechtzeitig und geben klare Empfehlungen.
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Check className="w-5 h-5 text-[#1D2D5D]" /> Ergebnis
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            Ampel-Logik mit Ergebnis-PDF & Mail-Trigger (automatisiert oder manuell).
-          </CardContent>
-        </Card>
       </section>
 
-      <Button
-  className="bg-[#23B1EC] hover:bg-[#1D2D5D] text-white px-6 py-3 rounded"
-  onClick={() => setPackageModalOpen(true)}
->
-  Jetzt Website prüfen lassen
-</Button>
+      {/* Ergebnis-Anzeige nach Upload */}
+      {fileUploaded && (
+        <section className="text-center mb-16">
+          <h2 className="text-2xl font-bold mb-6">Dein Ergebnis</h2>
+          <div className="flex justify-center gap-6">
+            <div className="flex flex-col items-center">
+              <XCircle className="w-8 h-8 text-red-500" />
+              <span className="text-sm mt-1">Kritisch</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <AlertTriangle className="w-8 h-8 text-yellow-400" />
+              <span className="text-sm mt-1">Teilweise</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <CheckCircle className="w-8 h-8 text-green-500" />
+              <span className="text-sm mt-1">Konform</span>
+            </div>
+          </div>
+          <p className="text-gray-600 mt-6 max-w-xl mx-auto">
+            Diese Bewertung basiert auf typischen DSGVO-Mustern. Eine vollständige Analyse erhältst du im Anschluss per Mail oder als PDF.
+          </p>
+        </section>
+      )}
+
+      {/* Call-to-Action */}
+      <div className="text-center">
+        <Button
+          className="bg-[#23B1EC] hover:bg-[#1D2D5D] text-white px-6 py-3 rounded"
+          onClick={() => setPackageModalOpen(true)}
+        >
+          Weiter zur Auswertung
         </Button>
       </div>
 
@@ -87,7 +84,11 @@ export default function Index() {
         open={packageModalOpen}
         onOpenChange={setPackageModalOpen}
       />
+
+      {/* Footer */}
+      <footer className="text-center text-sm text-gray-500 mt-20">
+        Powered by Monster AG · DSGVO geprüft, automatisiert, erklärt.
+      </footer>
     </div>
   );
 }
-// Redeploy-Trigger
