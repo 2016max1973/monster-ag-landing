@@ -1,70 +1,74 @@
 import { useState } from "react";
+import { UploadCloud, CheckCircle, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { UploadCloud, CheckCircle, AlertTriangle, XCircle } from "lucide-react";
-import PackageSelectionModal from "@/components/PackageSelectionModal";
 
 export default function Index() {
   const [fileUploaded, setFileUploaded] = useState(false);
-  const [packageModalOpen, setPackageModalOpen] = useState(false);
+  const [email, setEmail] = useState("");
 
   return (
     <div className="min-h-screen bg-[#E6F7FF] text-[#1D2D5D] px-6 py-12 font-sans">
-      {/* Logo + Produktname */}
+      {/* Logo + Headline */}
       <header className="text-center mb-10">
         <img
           src="/monster-ag-logo.png"
           alt="Monster AG Logo"
-          className="w-48 h-48 mx-auto mb-4 object-contain"
+          className="w-40 h-40 mx-auto mb-4 object-contain"
         />
-        <h1 className="text-5xl font-extrabold tracking-tight">DSVGOMonster</h1>
+        <h1 className="text-5xl font-extrabold tracking-tight">DSGVOMonster</h1>
         <p className="text-lg text-gray-700 mt-2 max-w-xl mx-auto">
-          Lade deine Datenschutzerklärung hoch oder gib deine Website an – wir analysieren automatisch und anonym auf DSGVO-Verstöße.
+          Lade deine Datenschutzerklärung hoch, gib deine E-Mail an –
+          und erhalte automatisch eine Bewertung per Mail.
         </p>
       </header>
 
-      {/* Upload-Feld */}
-      <section className="max-w-xl mx-auto bg-white rounded-xl shadow-lg p-6 mb-12 text-center">
-        <UploadCloud className="w-10 h-10 mx-auto text-[#1D2D5D] mb-4" />
-        <p className="mb-4 font-medium">PDF hochladen oder Website-URL eingeben:</p>
+      {/* 3 Karten */}
+      <section className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-12">
+        <div className="bg-white rounded-xl shadow p-6 text-center">
+          <UploadCloud className="w-8 h-8 text-[#1D2D5D] mx-auto mb-3" />
+          <h2 className="text-xl font-semibold mb-2">Datenschutz</h2>
+          <p className="text-sm text-gray-600">
+            DSGVO-Konformität deiner Seite – geprüft, bewertet und dokumentiert.
+          </p>
+        </div>
+        <div className="bg-white rounded-xl shadow p-6 text-center">
+          <AlertTriangle className="w-8 h-8 text-[#FF9900] mx-auto mb-3" />
+          <h2 className="text-xl font-semibold mb-2">E-Mail</h2>
+          <p className="text-sm text-gray-600">
+            Gib deine E-Mail-Adresse an – du erhältst automatisch deine Bewertung.
+          </p>
+        </div>
+        <div className="bg-white rounded-xl shadow p-6 text-center">
+          <CheckCircle className="w-8 h-8 text-green-500 mx-auto mb-3" />
+          <h2 className="text-xl font-semibold mb-2">Ergebnis</h2>
+          <p className="text-sm text-gray-600">
+            Ampel-Logik mit Ergebnis-PDF & Mail-Trigger (automatisiert oder manuell).
+          </p>
+        </div>
+      </section>
+
+      {/* Upload */}
+      <section className="bg-white rounded-xl shadow-lg p-8 max-w-xl mx-auto text-center">
         <input
           type="file"
-          accept=".pdf"
+          accept=".pdf,.doc,.docx"
           onChange={() => setFileUploaded(true)}
           className="mb-4 block mx-auto"
         />
         <input
-          type="text"
-          placeholder="https://deine-website.de"
-          className="mb-4 block w-full px-4 py-2 border border-gray-300 rounded"
+          type="email"
+          placeholder="Deine E-Mail-Adresse"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="mb-4 w-full px-4 py-2 border border-gray-300 rounded"
         />
         <Button
-          onClick={() => setPackageModalOpen(true)}
-          className="bg-[#23B1EC] hover:bg-[#1D2D5D] text-white w-full"
+          onClick={() => alert("Wird bald versendet 💌")}
+          disabled={!fileUploaded || !email}
         >
           Jetzt prüfen lassen
         </Button>
       </section>
-
-      {/* Ergebnisanzeige (nach Upload sichtbar) */}
-      {fileUploaded && (
-        <section className="text-center mb-16">
-          <h2 className="text-2xl font-bold mb-6">Erste Einschätzung</h2>
-          <div className="flex justify-center gap-6">
-            <XCircle className="w-8 h-8 text-red-500" />
-            <AlertTriangle className="w-8 h-8 text-yellow-400" />
-            <CheckCircle className="w-8 h-8 text-green-500" />
-          </div>
-          <p className="text-gray-600 mt-4 text-sm max-w-xl mx-auto">
-            Dein Dokument wird analysiert. Die finale Bewertung inkl. PDF-Bericht und Handlungsempfehlung folgt nach dem nächsten Schritt.
-          </p>
-        </section>
-      )}
-
-      {/* Modal-Auslösung */}
-      <PackageSelectionModal
-        open={packageModalOpen}
-        onOpenChange={setPackageModalOpen}
-      />
 
       {/* Footer */}
       <footer className="text-center text-sm text-gray-500 mt-20">
