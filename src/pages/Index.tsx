@@ -74,12 +74,12 @@ export default function Index() {
         </Card>
       </section>
 
-      <div className="text-center">
-        <Button
-          className="bg-[#23B1EC] hover:bg-[#1D2D5D] text-white px-6 py-3 rounded"
-          onClick={() => setPackageModalOpen(true)}
-        >
-          Jetzt Website prüfen lassen
+      <Button
+  className="bg-[#23B1EC] hover:bg-[#1D2D5D] text-white px-6 py-3 rounded"
+  onClick={() => setPackageModalOpen(true)}
+>
+  Jetzt Website prüfen lassen
+</Button>
         </Button>
       </div>
 
