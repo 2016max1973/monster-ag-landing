@@ -1,33 +1,104 @@
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Shield, Zap, CheckCircle } from "lucide-react";
+import PackageSelectionModal from "@/components/PackageSelectionModal";
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EduEscape - Educational Pathways</title>
-    <meta name="description" content="Transform your career with EduEscape's comprehensive educational packages designed for working professionals" />
-    <meta name="author" content="EduEscape" />
+export default function Index() {
+  const [packageModalOpen, setPackageModalOpen] = useState(false);
 
-    <!-- Google Fonts - Poppins -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  return (
+    <div className="min-h-screen bg-[#E6F7FF] text-[#1D2D5D] px-6 py-12 font-sans">
+      {/* Header mit Logo und Titel */}
+      <header className="text-center mb-12">
+        <img
+          src="/monster-ag-logo.png"
+          alt="Monster AG Logo"
+          className="w-40 h-40 mx-auto mb-6 rounded-full shadow-xl object-contain"
+        />
+        <h1 className="text-4xl font-bold">Datenschutzprüfung mit Monster AG</h1>
+        <p className="mt-3 text-lg text-gray-700 max-w-xl mx-auto">
+          Wir scannen deine Website anonym auf DSGVO- und Barrierefreiheitsverstöße – mit Ampelbewertung & automatischer Auswertung.
+        </p>
+      </header>
 
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%234F46E5'/><stop offset='100%25' style='stop-color:%237C3AED'/></linearGradient></defs><rect width='32' height='32' rx='6' fill='url(%23g)'/><path d='M16 6l6 6-6 6-6-6z' fill='white'/><circle cx='16' cy='22' r='4' fill='white'/></svg>" type="image/svg+xml">
+      {/* Infoblock zu Monster AG */}
+      <section className="max-w-3xl mx-auto text-center mb-12">
+        <p className="text-md text-gray-600">
+          Ob lokale Unternehmen, Coaches oder große Onlineshops – das neue Barrierefreiheitsgesetz (BFSG) gilt ab 2025. Kombiniert mit der DSGVO wird es Pflicht, digitale Angebote barrierefrei und datenschutzkonform bereitzustellen. Monster AG hilft dir dabei – schnell, automatisch und verständlich.
+        </p>
+      </section>
 
-    <meta property="og:title" content="EduEscape - Educational Pathways" />
-    <meta property="og:description" content="Transform your career with EduEscape's comprehensive educational packages designed for working professionals" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+      {/* Ampelanzeige statisch erklärt */}
+      <section className="max-w-3xl mx-auto mb-16">
+        <h2 className="text-2xl font-bold text-center mb-4">Wie funktioniert die Bewertung?</h2>
+        <div className="flex justify-center items-center gap-6 mb-4">
+          <div className="flex flex-col items-center">
+            <div className="w-6 h-6 rounded-full bg-green-500 mb-1"></div>
+            <span className="text-sm">Konform</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="w-6 h-6 rounded-full bg-yellow-400 mb-1"></div>
+            <span className="text-sm">teilweise</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="w-6 h-6 rounded-full bg-red-500 mb-1"></div>
+            <span className="text-sm">kritisch</span>
+          </div>
+        </div>
+        <p className="text-center text-gray-600 text-sm">
+          Unsere Analyse bewertet deine Website nach aktuellen gesetzlichen Vorgaben (DSGVO & BFSG). Du erhältst im Anschluss eine Ampelbewertung mit Empfehlungen – auf Wunsch auch als PDF & per E-Mail.
+        </p>
+      </section>
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@eduscape" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-  </head>
+      {/* Info-Karten */}
+      <section className="grid gap-6 md:grid-cols-3 max-w-6xl mx-auto mb-16">
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Shield className="w-5 h-5 text-[#1D2D5D]" /> Datenschutz
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            DSGVO-Konformität deiner Seite – geprüft, bewertet und dokumentiert.
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Zap className="w-5 h-5 text-[#1D2D5D]" /> Barrierefreiheit
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            Wir erkennen Verstöße gegen das neue BFSG / EAA rechtzeitig und geben klare Empfehlungen.
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <CheckCircle className="w-5 h-5 text-[#1D2D5D]" /> Ergebnis
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            Ampelbewertung, PDF-Auswertung & Mail-Trigger – automatisiert oder auf Wunsch manuell.
+          </CardContent>
+        </Card>
+      </section>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+      {/* Call-to-action */}
+      <div className="text-center">
+        <Button
+          className="bg-[#23B1EC] hover:bg-[#1D2D5D] text-white px-6 py-3 rounded"
+          onClick={() => setPackageModalOpen(true)}
+        >
+          Jetzt Website prüfen lassen
+        </Button>
+      </div>
+
+      <PackageSelectionModal
+        open={packageModalOpen}
+        onOpenChange={setPackageModalOpen}
+      />
+    </div>
+  );
+}
