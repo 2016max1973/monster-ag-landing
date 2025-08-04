@@ -1,33 +1,30 @@
 import { useState } from "react";
+import { UploadCloud, CheckCircle, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  UploadCloud,
-  CheckCircle,
-  AlertTriangle,
-  XCircle,
-} from "lucide-react";
-import PackageSelectionModal from "@/components/PackageSelectionModal";
+import Image from "next/image";
 
 export default function Index() {
   const [fileUploaded, setFileUploaded] = useState<File | null>(null);
+  const [email, setEmail] = useState("");
   const [packageModalOpen, setPackageModalOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-[#E6F7FF] text-[#1D2D5D] px-6 py-12 font-sans">
-      <header className="text-center mb-10">
-        <img
+      <header className="text-center mb-12">
+        <Image
           src="/monster-ag-logo.png"
           alt="Monster AG Logo"
-          className="w-48 h-48 mx-auto mb-4 object-contain"
+          width={96}
+          height={96}
+          className="mx-auto mb-4"
         />
-        <h1 className="text-5xl font-extrabold tracking-tight">DSVGOMonster</h1>
+        <h1 className="text-4xl font-bold">DSGVOMonster</h1>
         <p className="text-lg text-gray-700 mt-2 max-w-xl mx-auto">
-          Lade deine Datenschutzerklärung hoch oder gib deine Website an – wir
-          analysieren automatisch und anonym auf DSGVO-Verstöße.
+          Lade deine Datenschutzerklärung hoch oder gib deine Website an – wir analysieren sie automatisch und anonym auf DSGVO-Verstöße.
         </p>
       </header>
 
-      {/* 3 Karten */}
+      {/* Drei Karten */}
       <section className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-12">
         <div className="bg-white rounded-xl shadow p-6 text-center">
           <UploadCloud className="w-8 h-8 text-[#1D2D5D] mx-auto mb-3" />
@@ -54,22 +51,26 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Upload-Bereich */}
+      {/* Upload und E-Mail */}
       <section className="bg-white rounded-xl shadow-lg p-8 max-w-xl mx-auto text-center">
         <input
           type="file"
           accept=".pdf,.doc,.docx"
-          className="mb-4 w-full"
           onChange={(e) => {
             const file = e.target.files?.[0] ?? null;
             setFileUploaded(file);
           }}
+          className="block w-full mb-4"
         />
+
         <input
           type="email"
           placeholder="Deine E-Mail-Adresse"
-          className="mb-4 w-full p-2 border rounded"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full px-4 py-2 border border-gray-300 rounded mb-4"
         />
+
         <Button
           className="bg-[#23B1EC] hover:bg-[#1D2D5D] text-white w-full"
           onClick={() => setPackageModalOpen(true)}
@@ -77,16 +78,6 @@ export default function Index() {
           Jetzt Website prüfen lassen
         </Button>
       </section>
-
-      {/* Modal-Auslösung */}
-      <PackageSelectionModal
-        open={packageModalOpen}
-        onOpenChange={setPackageModalOpen}
-      />
-
-      <footer className="text-center text-sm text-gray-500 mt-20">
-        Powered by Monster AG – DSGVO geprüft, automatisiert, erklärt.
-      </footer>
     </div>
   );
 }
