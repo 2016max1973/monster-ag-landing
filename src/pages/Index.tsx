@@ -18,10 +18,11 @@ export default function Index() {
         />
         <h1 className="text-4xl font-bold">DSGVOMonster</h1>
         <p className="text-lg text-gray-700 mt-2 max-w-xl mx-auto">
-          Lade deine Datenschutzerklärung hoch oder gib deine Website an – wir analysieren sie für dich.
+          Lade deine Datenschutzerklärung hoch oder gib deine Website an – wir analysieren sie automatisch.
         </p>
       </header>
 
+      {/* 3 Karten */}
       <section className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-12">
         <div className="bg-white rounded-xl shadow p-6 text-center">
           <UploadCloud className="w-8 h-8 text-[#1D2D5D] mx-auto mb-3" />
@@ -41,11 +42,12 @@ export default function Index() {
           <CheckCircle className="w-8 h-8 text-green-500 mx-auto mb-3" />
           <h2 className="text-xl font-semibold mb-2">Ergebnis</h2>
           <p className="text-sm text-gray-600">
-            Ampel-Logik mit Ergebnis-PDF & Mail-Trigger (automatisiert oder manuell).
+            Ampel-Logik mit Ergebnis-PDF (automatisiert oder manuell).
           </p>
         </div>
       </section>
 
+      {/* Upload-Bereich */}
       <section className="bg-white rounded-xl shadow-lg p-8 max-w-xl mx-auto text-center">
         <input
           type="file"
@@ -54,26 +56,19 @@ export default function Index() {
             const file = e.target.files?.[0] ?? null;
             setFileUploaded(file);
           }}
-          className="block w-full my-4"
+          className="block w-full mb-4"
         />
         <input
           type="email"
           placeholder="Deine E-Mail-Adresse"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="block w-full px-4 py-2 border rounded my-4"
+          className="block w-full border border-gray-300 rounded px-4 py-2 mb-4"
         />
-        <button
-          className="bg-[#23B1EC] hover:bg-[#1D2D5D] text-white font-bold py-2 px-4 rounded"
-          type="button"
-        >
-          Jetzt Website prüfen lassen
+        <button className="bg-[#1D2D5D] text-white px-6 py-2 rounded hover:bg-[#0f1a35] transition">
+          Jetzt prüfen lassen
         </button>
       </section>
-
-      <footer className="text-center text-sm text-gray-500 mt-12">
-        Powered by Monster AG – DSGVO geprüft, automatisiert, erklärt.
-      </footer>
     </div>
   );
 }
